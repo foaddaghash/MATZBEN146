@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>מצפן המפץ</title>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -97,13 +98,16 @@
       <option value="אימון מח'צ">אימון מח"צ</option>
       <option value="אימון חובשים">אימון חובשים</option>
       <option value="אימון פינוי">אימון פינוי</option>
+      <option value="אימון אחר">אימון אחר</option>
     </select>
     
     <button type="button" onclick="submitForm()">שלח בקשה</button>
   </form>
 
   <script>
-    function submitForm() {
+  emailjs.init("81wXnDrrqTo6h6suJ");
+
+   function sendEmail() {
       const name = document.getElementById('name').value;
       const framework = document.getElementById('framework').value;
       const phone = document.getElementById('phone').value;
@@ -111,13 +115,27 @@
       const time = document.getElementById('time').value;
       const category = document.getElementById('category').value;
 
-      if (!name || !framework || !phone || !date || !time || !category) {
-        alert('נא למלא את כל השדות!');
-        return;
-      }
+      // שליחת הנתונים באמצעות EmailJS
+      emailjs.send("service_jxtxayk", "template_tfy69hc", {
+        name: name,
+        framework: framework,
+        phone: phone,
+        date: date,
+        time: time,
+        category: category
+      })
+      .then(function(response) {
+        alert("בקשת האימון נשלחה בהצלחה!");
+        document.getElementById('trainingForm').reset();
+        console.log("SUCCESS!", response.status, response.text);
+      }, function(error) {
+        alert("אירעה שגיאה בשליחת הבקשה. נסה שוב.");
+        console.error("FAILED...", error);
+      });
 
       alert('בקשת האימון נשלחה בהצלחה!');
       document.getElementById('trainingForm').reset();
+      
     }
   </script>
 </body>
