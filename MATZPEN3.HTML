@@ -4,41 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>מצפן המפץ</title>
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #1a1a1a;
+      background-color: #1a1a1a; 
       color: #ffffff;
       margin: 0;
       padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
     }
     header {
       display: flex;
       align-items: center;
-      justify-content: center; /* ממקם את האלמנטים במרכז */
+      justify-content: center;
+      background-color: #004d00; 
       width: 100%;
-      background-color: #333333;
-      padding: 10px;
+      padding: 20px;
     }
-    header img {
-      height: 50px;
-      margin-left: 10px; /* מרווח בין הסמל לכותרת */
-    }
-    h1 {
-      color: #4CAF50;
+    header h1 {
+      color: #4CAF50; 
       margin: 0;
-      text-align: center;
     }
     form {
       background-color: #333333;
       padding: 20px;
       border-radius: 8px;
+      margin-top: 20px;
       width: 90%;
       max-width: 400px;
     }
@@ -47,7 +41,7 @@
       margin-bottom: 8px;
       font-weight: bold;
     }
-    input, select, textarea, button {
+    input, select, button {
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
@@ -55,7 +49,7 @@
       border-radius: 5px;
       font-size: 16px;
     }
-    input, select, textarea {
+    input, select {
       background-color: #444444;
       color: #ffffff;
     }
@@ -72,7 +66,6 @@
 </head>
 <body>
   <header>
-    <img src="הורדה.png" alt="סמל מצפן המפץ">
     <h1>מצפן המפץ</h1>
   </header>
   
@@ -98,16 +91,16 @@
       <option value="אימון מח'צ">אימון מח"צ</option>
       <option value="אימון חובשים">אימון חובשים</option>
       <option value="אימון פינוי">אימון פינוי</option>
-      <option value="אימון אחר">אימון אחר</option>
     </select>
     
-    <button type="button" onclick="submitForm()">שלח בקשה</button>
+    <button type="button" onclick="sendEmail()">שלח בקשה</button>
   </form>
 
   <script>
-  emailjs.init("81wXnDrrqTo6h6suJ");
+    // אתחול EmailJS עם מזהה המשתמש שלך
+    emailjs.init("YOUR_PUBLIC_KEY");
 
-   function sendEmail() {
+    function sendEmail() {
       const name = document.getElementById('name').value;
       const framework = document.getElementById('framework').value;
       const phone = document.getElementById('phone').value;
@@ -116,7 +109,7 @@
       const category = document.getElementById('category').value;
 
       // שליחת הנתונים באמצעות EmailJS
-      emailjs.send("service_jxtxayk", "template_tfy69hc", {
+      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
         name: name,
         framework: framework,
         phone: phone,
@@ -132,10 +125,6 @@
         alert("אירעה שגיאה בשליחת הבקשה. נסה שוב.");
         console.error("FAILED...", error);
       });
-
-      alert('בקשת האימון נשלחה בהצלחה!');
-      document.getElementById('trainingForm').reset();
-      
     }
   </script>
 </body>
