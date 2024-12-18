@@ -106,7 +106,7 @@
       event.preventDefault(); // מניעת שליחה ברירת מחדל של הטופס
 
       // שליחת הטופס באמצעות sendForm
-      emailjs.sendForm("service_matzpen", "template_matzpen146", this)
+      emailjs.sendForm("service_matzpen", "template_matzpen146", "trainingForm")
         .then(function(response) {
           alert("בקשת האימון נשלחה בהצלחה!");
           document.getElementById('trainingForm').reset();
