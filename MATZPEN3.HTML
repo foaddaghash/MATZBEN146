@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #1a1a1a; 
+      background-color: #1a1a1a;
       color: #ffffff;
       margin: 0;
       padding: 0;
@@ -20,12 +20,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #004d00; 
+      background-color: #004d00;
       width: 100%;
       padding: 20px;
     }
     header h1 {
-      color: #4CAF50; 
+      color: #4CAF50;
       margin: 0;
     }
     form {
@@ -69,6 +69,7 @@
     <h1>מצפן המפץ</h1>
   </header>
   
+  <!-- טופס לשליחת בקשה -->
   <form id="trainingForm">
     <label for="name">שם מלא:</label>
     <input type="text" id="name" name="name" required>
@@ -93,39 +94,28 @@
       <option value="אימון פינוי">אימון פינוי</option>
     </select>
     
-    <button type="button" onclick="sendEmail()">שלח בקשה</button>
+    <button type="submit">שלח בקשה</button>
   </form>
 
   <script>
-    // אתחול EmailJS עם מזהה המשתמש שלך
+    // אתחול EmailJS עם המפתח הציבורי שלך
     emailjs.init("81wXnDrrqTo6h6suJ");
 
-    function sendEmail() {
-      const name = document.getElementById('name').value;
-      const framework = document.getElementById('framework').value;
-      const phone = document.getElementById('phone').value;
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
-      const category = document.getElementById('category').value;
+    // טיפול באירוע שליחת הטופס
+    document.getElementById("trainingForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // מניעת שליחה ברירת מחדל של הטופס
 
-      // שליחת הנתונים באמצעות EmailJS
-      emailjs.send("service_matzpen", "template_matzpen146", {
-        name: name,
-        framework: framework,
-        phone: phone,
-        date: date,
-        time: time,
-        category: category
-      })
-      .then(function(response) {
-        alert("בקשת האימון נשלחה בהצלחה!");
-        document.getElementById('trainingForm').reset();
-        console.log("SUCCESS!", response.status, response.text);
-      }, function(error) {
-        alert("אירעה שגיאה בשליחת הבקשה. נסה שוב.");
-        console.error("FAILED...", error);
-      });
-    }
+      // שליחת הטופס באמצעות sendForm
+      emailjs.sendForm("service_matzpen", "template_matzpen146", this)
+        .then(function(response) {
+          alert("בקשת האימון נשלחה בהצלחה!");
+          document.getElementById('trainingForm').reset();
+          console.log("SUCCESS!", response.status, response.text);
+        }, function(error) {
+          alert("אירעה שגיאה בשליחת הבקשה. נסה שוב.");
+          console.error("FAILED...", error);
+        });
+    });
   </script>
 </body>
 </html>
