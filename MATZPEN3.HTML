@@ -101,12 +101,12 @@
     emailjs.init("81wXnDrrqTo6h6suJ");
 
     function sendEmail() {
-      const name = document.getElementById('שם מלא').value;
-      const framework = document.getElementById('מסגרת').value;
-      const phone = document.getElementById('מספר טלפון').value;
-      const date = document.getElementById('תאריך').value;
-      const time = document.getElementById('שעה').value;
-      const category = document.getElementById('קטגוריית אימון').value;
+      const name = document.getElementById('name').value;
+      const framework = document.getElementById('framework').value;
+      const phone = document.getElementById('phone').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const category = document.getElementById('category').value;
 
       // שליחת הנתונים באמצעות EmailJS
       emailjs.send("service_jxtxayk", "template_tfy69hc", {
